@@ -17,3 +17,6 @@ git push origin main
 
 <-- change git url (in case of changing repository) -->
 git remote set-url origin https://github.com/myk3lekill/template.git
+
+<-- remove git inizializing (after removing git init you need to init repository again otherwise you will have too many files to git) -->
+rm -rf .git*
