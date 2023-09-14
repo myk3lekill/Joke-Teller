@@ -34,6 +34,7 @@ async function getJokes() {
 try {
     const response = await fetch(apiUrl);
     const data = await response.json();
+    //if statement is needed to manage two part jokes
     if (data.setup) {
         joke = `${data.setup} ... ${data.delivery}`;
     } else {
