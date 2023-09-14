@@ -13,6 +13,11 @@ audioElement.play()
 
 const apiKey = '9da87e94f4d444f9abff69277c1dcc9e'
 
+//Disable/Enable Button 'Tell Me Ajoke' (function that resolve the bug to listen full joke per click)
+function toggleButton() {
+    button.disabled = !button.disabled
+}
+
 //Passing Joke to VoiceRSS API
 function tellMe(joke) {
     console.log('tellMe function', joke)
@@ -42,10 +47,15 @@ try {
         joke = data.joke;
     }
     tellMe(joke); //pass the joke to tellMe function that activate the VocieAPI
+    toggleButton(); //disable button 'Tell me a joke' until speach ended when getJokes() function has lunched
 } catch (error) {
     console.log(error)
 }
 }
 
-//Event Listener on click the button 'Tell me a Joke'
+//Event Listeners: 
+//1. on click the button 'Tell me a Joke' lunch getJokes() function
 button.addEventListener('click', getJokes);
+
+//2. on ended joke lunch toggleButton() function to re-activate the button
+audioElement.addEventListener('ended', toggleButton)
