@@ -13,16 +13,35 @@ audioElement.play()
 
 const apiKey = '9da87e94f4d444f9abff69277c1dcc9e'
 
-function test() {
-    VoiceRSS.speech({
-        key: apiKey,
-        src: 'Hello, world!',
-        hl: 'en-us',
-        v: 'Linda',
-        r: 0, 
-        c: 'mp3',
-        f: '44khz_16bit_stereo',
-        ssml: false
- });
+// function test() {
+//     VoiceRSS.speech({
+//         key: apiKey,
+//         src: 'Hello, world!',
+//         hl: 'en-us',
+//         v: 'Linda',
+//         r: 0, 
+//         c: 'mp3',
+//         f: '44khz_16bit_stereo',
+//         ssml: false
+//  });
+// }
+// test();
+
+//Get jokes from JokeAPI using fetch() method or async function with await variables and fetch method
+async function getJokes() {
+    let joke = '';
+    const apiUrl = 'https://v2.jokeapi.dev/joke/Programming?blacklistFlags=nsfw,religious,political,racist,sexist,explicit&type=single'
+try {
+    const response = await fetch(apiUrl);
+    const data = await response.json();
+    if (data.setup) {
+        joke = `${data.setup} ... ${data.delivery}`;
+    } else {
+        joke = data.joke;
+    }
+    console.log(joke)
+} catch (error) {
+    alert('ooooops', error)
 }
-test();
+}
+getJokes();
