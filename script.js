@@ -13,21 +13,22 @@ audioElement.play()
 
 const apiKey = '9da87e94f4d444f9abff69277c1dcc9e'
 
-// function test() {
-//     VoiceRSS.speech({
-//         key: apiKey,
-//         src: 'Hello, world!',
-//         hl: 'en-us',
-//         v: 'Linda',
-//         r: 0, 
-//         c: 'mp3',
-//         f: '44khz_16bit_stereo',
-//         ssml: false
-//  });
-// }
-// test();
+//Passing Joke to VoiceRSS API
+function tellMe(joke) {
+    console.log('tellMe function', joke)
+    VoiceRSS.speech({
+                key: apiKey,
+                src: joke,//pass joke instead of 'Hello World'
+                hl: 'en-us',
+                v: 'Linda',
+                r: 0, 
+                c: 'mp3',
+                f: '44khz_16bit_stereo',
+                ssml: false
+         });
+};
 
-//Get jokes from JokeAPI using fetch() method or async function with await variables and fetch method
+//Get jokes from JokeAPI using fetch().then() method or async function with await variables and fetch method
 async function getJokes() {
     let joke = '';
     const apiUrl = 'https://v2.jokeapi.dev/joke/Programming?blacklistFlags=nsfw,religious,political,racist,sexist,explicit&type=single'
@@ -40,9 +41,11 @@ try {
     } else {
         joke = data.joke;
     }
-    console.log(joke)
+    tellMe(joke); //pass the joke to tellMe function that activate the VocieAPI
 } catch (error) {
-    alert('ooooops', error)
+    console.log(error)
 }
 }
-getJokes();
+
+//Event Listener on click the button 'Tell me a Joke'
+button.addEventListener('click', getJokes);
